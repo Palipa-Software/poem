@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tutorai/modules/category/category_controller.dart';
-import 'package:tutorai/shared/widgets/category_card.dart';
+import 'package:lovespoem/modules/category/category_controller.dart';
+import 'package:lovespoem/shared/widgets/category_card.dart';
 
 CategoryController controller = CategoryController();
 ScrollController _scrollController = ScrollController();
@@ -31,9 +31,7 @@ final List<Widget> categorys = [
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: index + 1 == controller.selectedIndex1.value
-                            ? Color(0xffa289f8)
-                            : Colors.white,
+                        color: index + 1 == controller.selectedIndex1.value ? Color(0xffa289f8) : Colors.white,
                         border: Border.all(
                           width: 0.1.w,
                           color: Color(
@@ -80,9 +78,7 @@ final List<Widget> categorys = [
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex2.value
-                              ? Color(0xffa289f8)
-                              : Colors.white,
+                          color: index + 1 == controller.selectedIndex2.value ? Color(0xffa289f8) : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(
@@ -129,9 +125,7 @@ final List<Widget> categorys = [
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex3.value
-                              ? Color(0xffa289f8)
-                              : Colors.white,
+                          color: index + 1 == controller.selectedIndex3.value ? Color(0xffa289f8) : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(
@@ -178,9 +172,7 @@ final List<Widget> categorys = [
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex4.value
-                              ? Color(0xffa289f8)
-                              : Colors.white,
+                          color: index + 1 == controller.selectedIndex4.value ? Color(0xffa289f8) : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(

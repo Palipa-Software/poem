@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tutorai/modules/category/category_controller.dart';
+import 'package:lovespoem/modules/category/category_controller.dart';
 
 class CategoryCard extends StatelessWidget {
   CategoryCard({
@@ -43,10 +43,7 @@ class CategoryCard extends StatelessWidget {
                   height: 5.h,
                   width: 100.w,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          bottom: BorderSide(
-                              color: Color(0xffbec0c7), width: 0.5.w))),
+                      color: Colors.white, border: Border(bottom: BorderSide(color: Color(0xffbec0c7), width: 0.5.w))),
                   child: Padding(
                     padding: EdgeInsets.all(10.sp),
                     child: Row(

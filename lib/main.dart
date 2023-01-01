@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:tutorai/routes/routes.dart';
+import 'package:lovespoem/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());

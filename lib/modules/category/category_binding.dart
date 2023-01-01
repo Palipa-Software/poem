@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tutorai/modules/category/category_controller.dart';
+import 'package:lovespoem/modules/category/category_controller.dart';
 
 class CategoryBinding extends Bindings {
   @override

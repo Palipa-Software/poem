@@ -9,8 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:tutorai/modules/generate/generate_controller.dart';
-import 'package:tutorai/shared/constants/colors.dart';
+import 'package:lovespoem/modules/generate/generate_controller.dart';
+import 'package:lovespoem/shared/constants/colors.dart';
 import 'package:typewritertext/typewritertext.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 

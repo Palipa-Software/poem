@@ -1,4 +1,4 @@
-package com.example.tutorai
+package com.example.lovespoem
 
 import io.flutter.embedding.android.FlutterActivity
 

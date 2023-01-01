@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tutorai/routes/app_pages.dart';
+import 'package:lovespoem/routes/app_pages.dart';
 
 class CategoryController extends GetxController {
   RxInt selectedIndex1 = 0.obs;
