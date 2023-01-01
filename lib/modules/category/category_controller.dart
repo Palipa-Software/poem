@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tutorai/routes/app_pages.dart';
 
 class CategoryController extends GetxController {
   RxInt selectedIndex1 = 0.obs;
@@ -17,4 +18,7 @@ class CategoryController extends GetxController {
   RxBool isExpanded3 = false.obs;
 
   RxBool isExpanded4 = false.obs;
+  void getToGenerateScreen() {
+    Get.toNamed(Routes.GENERATE);
+  }
 }

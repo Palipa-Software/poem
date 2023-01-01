@@ -30,8 +30,7 @@ class CategoryScreen extends GetView<CategoryController> {
               child: Bounceable(
                 onTap: () {},
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xffa289f8), shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Color(0xffa289f8), shape: BoxShape.circle),
                   child: Padding(
                     padding: EdgeInsets.only(left: 2.w),
                     child: Icon(
@@ -58,13 +57,13 @@ class CategoryScreen extends GetView<CategoryController> {
               height: 5.h,
             ),
             Bounceable(
-              onTap: () {},
+              onTap: () {
+                controller.getToGenerateScreen();
+              },
               child: Container(
                 height: 7.h,
                 width: 55.w,
-                decoration: BoxDecoration(
-                    color: Color(0xffa289f8),
-                    borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(color: Color(0xffa289f8), borderRadius: BorderRadius.circular(20)),
                 child: Center(
                   child: Text(
                     "Generate",
