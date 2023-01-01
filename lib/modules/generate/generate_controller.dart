@@ -16,6 +16,7 @@ class GenerateController extends GetxController {
     selectedFontTextStyle.add(const TextStyle());
   }
 
+  RxString bgPath = "assets/images/bg.png".obs;
   RxInt fontSize = 16.obs;
 //Font Seçimi
   List<TextStyle> get items {

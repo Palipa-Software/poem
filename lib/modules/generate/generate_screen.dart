@@ -10,6 +10,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:tutorai/modules/generate/generate_controller.dart';
+import 'package:tutorai/shared/constants/colors.dart';
 import 'package:typewritertext/typewritertext.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
@@ -40,7 +41,6 @@ class GenerateScreen extends GetView<GenerateController> {
                   controller: controller.ssController,
                   child: Poem(
                     text: poem,
-                    path: "assets/images/bg3.jpg",
                     controller: controller,
                   ),
                 ),
@@ -60,28 +60,28 @@ class GenerateScreen extends GetView<GenerateController> {
 
 //Şiirin bulunduğu widget
 class Poem extends StatelessWidget {
-  const Poem({Key? key, required this.text, required this.path, required this.controller}) : super(key: key);
+  const Poem({Key? key, required this.text, required this.controller}) : super(key: key);
 
   final String text;
-  final String path;
+
   final GenerateController controller;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 95.w,
-      height: 65.h,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage(
-            path,
+    return Obx(
+      () => Container(
+        width: 95.w,
+        height: 65.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(
+              controller.bgPath.value,
+            ),
           ),
         ),
-      ),
-      child: Obx(
-        () => Center(
+        child: Center(
           child: SingleChildScrollView(
               child: TypeWriterText(
                   alignment: Alignment.center,
@@ -112,33 +112,45 @@ class PoemStyleButton extends StatelessWidget {
             builder: (BuildContext context) {
               return Container(
                 width: 100.w,
-                height: 90.h,
-                color: const Color(0xff896AF5),
+                height: 40.h,
+                color: AppColors.cobalite,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Pick a font"),
+                        Text(
+                          "Pick a font",
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                        ),
                         TextButton(
                           onPressed: () {
                             showDialog(
                                 context: context,
                                 builder: (context) {
                                   return Dialog(
-                                      child: FontPicker(
-                                          showInDialog: true,
-                                          onFontChanged: (font) {
-                                            controller.selectedFont.value = font.fontFamily;
-                                            controller.selectedFontTextStyle[0] = font.toTextStyle();
-                                          },
-                                          googleFonts: controller.myGoogleFonts));
+                                      child: Theme(
+                                    data: ThemeData(primaryColor: AppColors.cobalite),
+                                    child: FontPicker(
+                                        showInDialog: true,
+                                        onFontChanged: (font) {
+                                          controller.selectedFont.value = font.fontFamily;
+                                          controller.selectedFontTextStyle[0] = font.toTextStyle();
+                                        },
+                                        googleFonts: controller.myGoogleFonts),
+                                  ));
                                 });
                           },
-                          child: Obx(() => Text(controller.selectedFont.value)),
+                          child: Obx(() => Text(
+                                controller.selectedFont.value,
+                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp, color: Colors.white),
+                              )),
                         ),
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text("Pick a font size"),
                         TextButton(
@@ -146,69 +158,93 @@ class PoemStyleButton extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Text("Pick Your Font Size"),
+                                title: Text(
+                                  "Pick Your Font Size",
+                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                                ),
                                 content: Obx(
                                   () => Container(
                                     width: 100.w,
                                     height: 25.h,
-                                    child: Center(
-                                      child: Column(children: [
-                                        NumberPicker(
-                                          value: controller.fontSize.value,
-                                          minValue: 1,
-                                          maxValue: 100,
-                                          step: 1,
-                                          itemHeight: 100,
-                                          axis: Axis.horizontal,
-                                          onChanged: (value) => controller.fontSize.value = value,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                                icon: Icon(Icons.remove),
-                                                onPressed: () {
-                                                  final newValue = controller.fontSize.value - 5;
-                                                  controller.fontSize.value = newValue.clamp(1, 100);
-                                                }),
-                                            Text('Font size : ${controller.fontSize.value}'),
-                                            IconButton(
-                                                icon: Icon(Icons.add),
-                                                onPressed: () {
-                                                  final newValue = controller.fontSize.value + 5;
-                                                  controller.fontSize.value = newValue.clamp(1, 100);
-                                                }),
-                                          ],
-                                        ),
-                                        TextButton(
-                                          child: Text(
-                                            "SELECT",
-                                            style: TextStyle(fontSize: 20),
+                                    child: Theme(
+                                      data: ThemeData(primaryColor: AppColors.cobalite),
+                                      child: Center(
+                                        child: Column(children: [
+                                          NumberPicker(
+                                            textStyle: TextStyle(color: AppColors.cobalite.withOpacity(0.5)),
+                                            selectedTextStyle: TextStyle(color: AppColors.cobalite, fontSize: 24.sp),
+                                            value: controller.fontSize.value,
+                                            minValue: 1,
+                                            maxValue: 100,
+                                            step: 1,
+                                            itemHeight: 100,
+                                            axis: Axis.horizontal,
+                                            onChanged: (value) => controller.fontSize.value = value,
                                           ),
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                      ]),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                  icon: Icon(
+                                                    Icons.remove,
+                                                    color: AppColors.cobalite,
+                                                  ),
+                                                  onPressed: () {
+                                                    final newValue = controller.fontSize.value - 5;
+                                                    controller.fontSize.value = newValue.clamp(1, 100);
+                                                  }),
+                                              Text('Font size : ${controller.fontSize.value}'),
+                                              IconButton(
+                                                  icon: Icon(
+                                                    Icons.add,
+                                                    color: AppColors.cobalite,
+                                                  ),
+                                                  onPressed: () {
+                                                    final newValue = controller.fontSize.value + 5;
+                                                    controller.fontSize.value = newValue.clamp(1, 100);
+                                                  }),
+                                            ],
+                                          ),
+                                          TextButton(
+                                            child: Text(
+                                              "SELECT",
+                                              style: TextStyle(fontSize: 20, color: AppColors.cobalite),
+                                            ),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                          ),
+                                        ]),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             );
                           },
-                          child: Obx(() => Text(controller.fontSize.value.toString())),
+                          child: Obx(() => Text(
+                                controller.fontSize.value.toString(),
+                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp, color: Colors.white),
+                              )),
                         ),
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Pick a text color"),
+                        Text(
+                          "Pick a text color",
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                        ),
                         TextButton(
                           onPressed: () {
                             showDialog(
                               context: context,
                               builder: ((context) => AlertDialog(
-                                  title: Text("Pick Your Color"),
+                                  title: Text(
+                                    "Pick Your Color",
+                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                                  ),
                                   content: Container(
                                     width: 100.w,
                                     height: 50.h,
@@ -238,24 +274,63 @@ class PoemStyleButton extends StatelessWidget {
                             );
                           },
                           child: Obx(
-                            () => Text(controller.textColor.value
-                                .toString()
-                                .replaceAll("Color(0xff", "#")
-                                .replaceAll("MaterialColor(primary", "")
-                                .replaceAll("MaterialAccentColor(primary", "")
-                                .replaceAll("ColorSwatch<dynamic>(primary", "")
-                                .replaceAll("value:", "")
-                                .replaceAll(")", "")),
+                            () => Text(
+                              controller.textColor.value
+                                  .toString()
+                                  .replaceAll("Color(0xff", "#")
+                                  .replaceAll("MaterialColor(primary", "")
+                                  .replaceAll("MaterialAccentColor(primary", "")
+                                  .replaceAll("ColorSwatch<dynamic>(primary", "")
+                                  .replaceAll("value:", "")
+                                  .replaceAll(")", ""),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Pick a poem background"),
+                        Text(
+                          "Pick a poem background",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18.sp,
+                          ),
+                        ),
                         TextButton(
-                          onPressed: () {},
-                          child: Text("star"),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      content: SingleChildScrollView(
+                                        child: Column(children: [
+                                          selectBg("assets/images/bg.png"),
+                                          selectBg("assets/images/bg2.jpg"),
+                                          selectBg("assets/images/bg3.jpg"),
+                                          selectBg("assets/images/bg4.jpg"),
+                                          selectBg("assets/images/bg5.jpg"),
+                                          selectBg("assets/images/bg6.jpg"),
+                                        ]),
+                                      ),
+                                    ));
+                          },
+                          child: Text(
+                            controller.bgPath.value
+                                .replaceAll("assets/images/", "")
+                                .replaceAll(".png", "")
+                                .replaceAll(".jpg", ""),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18.sp,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -269,6 +344,25 @@ class PoemStyleButton extends StatelessWidget {
           "Poem Style",
           style: TextStyle(color: Colors.grey),
         ));
+  }
+
+  Bounceable selectBg(String bgPath) {
+    return Bounceable(
+      onTap: () {
+        controller.bgPath.value = bgPath;
+
+        Get.back();
+      },
+      child: Card(
+        elevation: 8,
+        child: Image.asset(
+          bgPath,
+          height: 50.h,
+          width: 100.w,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
   }
 }
 
@@ -296,7 +390,7 @@ class ShareButton extends StatelessWidget {
               style: GoogleFonts.abel(
                   fontSize: 20.sp, fontWeight: FontWeight.w600, letterSpacing: 2, color: Colors.white)),
         ),
-        decoration: BoxDecoration(color: const Color(0xff896AF5), borderRadius: BorderRadius.circular(16.sp)),
+        decoration: BoxDecoration(color: AppColors.cobalite, borderRadius: BorderRadius.circular(16.sp)),
       ),
     );
   }
