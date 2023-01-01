@@ -47,6 +47,10 @@ dependencies:
   permission_handler: ^10.2.0
   image_gallery_saver: ^1.7.1
   path_provider: ^2.0.11
+  flutter_font_picker: ^1.1.0
+  typewritertext: ^1.8.0
+  flutter_colorpicker: ^1.0.3
+  numberpicker: ^2.1.1
   
 
 
