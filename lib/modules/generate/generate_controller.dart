@@ -3,8 +3,10 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import 'package:get/get.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -14,6 +16,17 @@ class GenerateController extends GetxController {
   void onInit() {
     super.onInit();
     selectedFontTextStyle.add(const TextStyle());
+  }
+
+  RxBool speakState = false.obs;
+  FlutterTts flutterTts = FlutterTts();
+  void speak(String poem) async {
+    flutterTts.setLanguage("en-US");
+    await flutterTts.speak(poem).whenComplete(() => speakState.value = false);
+  }
+
+  void stop() async {
+    await flutterTts.pause();
   }
 
   RxString bgPath = "assets/images/bg.png".obs;

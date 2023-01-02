@@ -51,6 +51,7 @@ dependencies:
   typewritertext: ^1.8.0
   flutter_colorpicker: ^1.0.3
   numberpicker: ^2.1.1
+  flutter_tts: ^3.6.3
   
 
 

@@ -18,7 +18,7 @@ class GenerateScreen extends GetView<GenerateController> {
   const GenerateScreen({super.key});
   static String poemTitle = "Oysa Herkes Öldürür Sevdiğini";
   static String poem =
-      "Kulak verin bu dediklerime,\n Kimi bir bakışı ile yapar bunu,\nKimi dalkavukça sözler ile… \nKimi bir bakışıyla yapar bunu,\nKimi dalkavukça sözlerle.\nKorkaklar öpücük ile  öldürür...\nYürekliler kılıç darbeleriyle.\n Kimi gençken öldürür sevdiğini\n Kimi yaşlıyken.\n Şehvetli ellerle boğar kimi\n \nKimi altından ellerle\n Merhametli kişi bıçak kullanır\n Çünkü bıçakla ölen çabuk soğur\n Kimi yeterince sevmez kimi fazla sever\n Kimi satar; kimi de satın alır\n Kimi gözyaşı döker öldürürken\n Kimi kılı kıpırdamadan\n Çünkü herkes öldürür sevdiğini\n Ama herkes öldürdü diye ölmez.";
+      "Whenever I think of you\nA gazelle goes down to drink water\nI see the meadows growing.\nWith you every evening\nA green olive grain\nA piece of blue sea\nIt takes me.\nThe more i think of you\nI’m planting roses where my hand touches\nI give water to the horses\nI love mountains even more.";
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,38 @@ class GenerateScreen extends GetView<GenerateController> {
                     controller: controller,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Obx(
+                () => Center(
+                    child: Bounceable(
+                  onTap: () {
+                    if (controller.speakState.isFalse) {
+                      controller.speak(poem);
+                      controller.speakState.value = true;
+                    } else {
+                      controller.stop();
+                      controller.speakState.value = false;
+                    }
+                  },
+                  child: controller.speakState.value
+                      ? Center(
+                          child: Icon(
+                            Icons.pause_circle,
+                            color: AppColors.cobalite,
+                            size: 30.sp,
+                          ),
+                        )
+                      : Center(
+                          child: Icon(
+                            Icons.play_circle,
+                            color: AppColors.cobalite,
+                            size: 30.sp,
+                          ),
+                        ),
+                )),
               ),
               SizedBox(
                 height: 2.h,
@@ -163,7 +195,7 @@ class PoemStyleButton extends StatelessWidget {
                                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
                                 ),
                                 content: Obx(
-                                  () => Container(
+                                  () => SizedBox(
                                     width: 100.w,
                                     height: 25.h,
                                     child: Theme(
@@ -245,7 +277,7 @@ class PoemStyleButton extends StatelessWidget {
                                     "Pick Your Color",
                                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
                                   ),
-                                  content: Container(
+                                  content: SizedBox(
                                     width: 100.w,
                                     height: 50.h,
                                     child: Column(

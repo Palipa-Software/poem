@@ -65,7 +65,7 @@ class CategoryScreen extends GetView<CategoryController> {
               child: Container(
                 height: 7.h,
                 width: 55.w,
-                decoration: BoxDecoration(color: Color(0xffa289f8), borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(color: const Color(0xffa289f8), borderRadius: BorderRadius.circular(20)),
                 child: Center(
                   child: Text(
                     "Generate",
