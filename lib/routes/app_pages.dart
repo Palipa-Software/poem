@@ -21,12 +21,12 @@ class AppPages {
     ),
     GetPage(
       name: Routes.CATEGORY,
-      page: () => const CategoryScreen(),
+      page: () => CategoryScreen(),
       binding: CategoryBinding(),
     ),
     GetPage(
       name: Routes.GENERATE,
-      page: () => const GenerateScreen(),
+      page: () => GenerateScreen(),
       binding: GenerateScreenBinding(),
     ),
   ];

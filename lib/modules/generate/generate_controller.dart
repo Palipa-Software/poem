@@ -12,6 +12,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GenerateController extends GetxController {
+  RxString poem = "".obs;
   @override
   void onInit() {
     super.onInit();
@@ -149,7 +150,10 @@ class GenerateController extends GetxController {
 //Widget görüntüsünü kaydetip paylaşma metodu
 Future saveAndShare(Uint8List bytes) async {
   final directory = await getApplicationDocumentsDirectory();
-  final time = DateTime.now().toIso8601String().replaceAll('.', '_').replaceAll(':', '_');
+  final time = DateTime.now()
+      .toIso8601String()
+      .replaceAll('.', '_')
+      .replaceAll(':', '_');
   final image = File("${directory.path}/poem$time.png");
   image.writeAsBytes(bytes);
   await Share.shareXFiles([XFile(image.path)]).then((value) => null);

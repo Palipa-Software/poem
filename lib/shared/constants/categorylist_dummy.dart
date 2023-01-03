@@ -12,7 +12,7 @@ final List<Widget> categorys = [
   Obx(() {
     return CategoryCard(
       questionText: "Who do you want to write to?",
-      answerText: controller.answer1.value,
+      answerText: controller.answerWhom.value,
       onTap: () {},
       children: [
         Container(
@@ -24,14 +24,16 @@ final List<Widget> categorys = [
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.w),
                 child: Bounceable(
-                  onTap: () {
+                  onTap: () async {
                     controller.selectedIndex1.value = index + 1;
-                    controller.answer1.value = answers1[index];
+                    controller.answerWhom.value = await answers1[index];
                     controller.isExpanded1.value = false;
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: index + 1 == controller.selectedIndex1.value ? Color(0xffa289f8) : Colors.white,
+                        color: index + 1 == controller.selectedIndex1.value
+                            ? Color(0xffa289f8)
+                            : Colors.white,
                         border: Border.all(
                           width: 0.1.w,
                           color: Color(
@@ -59,7 +61,7 @@ final List<Widget> categorys = [
       padding: EdgeInsets.only(top: 3.h),
       child: CategoryCard(
         questionText: "What is the occassion?",
-        answerText: controller.answer2.value,
+        answerText: controller.answerOccassion.value,
         onTap: () {},
         children: [
           Container(
@@ -73,12 +75,14 @@ final List<Widget> categorys = [
                   child: Bounceable(
                     onTap: () {
                       controller.selectedIndex2.value = index + 1;
-                      controller.answer2.value = answers2[index];
+                      controller.answerOccassion.value = answers2[index];
                       controller.isExpanded2.value = false;
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex2.value ? Color(0xffa289f8) : Colors.white,
+                          color: index + 1 == controller.selectedIndex2.value
+                              ? Color(0xffa289f8)
+                              : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(
@@ -107,7 +111,7 @@ final List<Widget> categorys = [
       padding: EdgeInsets.only(top: 3.h),
       child: CategoryCard(
         questionText: "What is your style?",
-        answerText: controller.answer3.value,
+        answerText: controller.answerStyle.value,
         onTap: () {},
         children: [
           Container(
@@ -121,11 +125,13 @@ final List<Widget> categorys = [
                   child: Bounceable(
                     onTap: () {
                       controller.selectedIndex3.value = index + 1;
-                      controller.answer3.value = answers3[index];
+                      controller.answerStyle.value = answers3[index];
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex3.value ? Color(0xffa289f8) : Colors.white,
+                          color: index + 1 == controller.selectedIndex3.value
+                              ? Color(0xffa289f8)
+                              : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(
@@ -154,7 +160,7 @@ final List<Widget> categorys = [
       padding: EdgeInsets.only(top: 3.h),
       child: CategoryCard(
         questionText: "What is your Tone?",
-        answerText: controller.answer4.value,
+        answerText: controller.answerTone.value,
         onTap: () {},
         children: [
           Container(
@@ -166,13 +172,15 @@ final List<Widget> categorys = [
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
                   child: Bounceable(
-                    onTap: () {
+                    onTap: () async {
                       controller.selectedIndex4.value = index + 1;
-                      controller.answer4.value = answers4[index];
+                      controller.answerTone.value = await answers4[index];
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: index + 1 == controller.selectedIndex4.value ? Color(0xffa289f8) : Colors.white,
+                          color: index + 1 == controller.selectedIndex4.value
+                              ? Color(0xffa289f8)
+                              : Colors.white,
                           border: Border.all(
                             width: 0.1.w,
                             color: Color(
@@ -204,6 +212,7 @@ final List<String> answers1 = [
   "Boy Friend",
   "Wife",
   "Husband",
+  "Teacher",
   "Mother",
   "Father",
   "Grand Ma",

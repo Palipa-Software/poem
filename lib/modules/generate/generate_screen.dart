@@ -15,13 +15,13 @@ import 'package:typewritertext/typewritertext.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class GenerateScreen extends GetView<GenerateController> {
-  const GenerateScreen({super.key});
+  GenerateScreen({super.key});
   static String poemTitle = "Oysa Herkes Öldürür Sevdiğini";
-  static String poem =
-      "Whenever I think of you\nA gazelle goes down to drink water\nI see the meadows growing.\nWith you every evening\nA green olive grain\nA piece of blue sea\nIt takes me.\nThe more i think of you\nI’m planting roses where my hand touches\nI give water to the horses\nI love mountains even more.";
 
   @override
   Widget build(BuildContext context) {
+    var arguments = Get.arguments;
+
     return Scaffold(
         appBar: AppBar(toolbarHeight: 3.h),
         body: SingleChildScrollView(
@@ -40,7 +40,7 @@ class GenerateScreen extends GetView<GenerateController> {
                 child: Screenshot(
                   controller: controller.ssController,
                   child: Poem(
-                    text: poem,
+                    text: arguments[0].toString(),
                     controller: controller,
                   ),
                 ),
@@ -53,7 +53,7 @@ class GenerateScreen extends GetView<GenerateController> {
                     child: Bounceable(
                   onTap: () {
                     if (controller.speakState.isFalse) {
-                      controller.speak(poem);
+                      controller.speak(arguments[0].toString());
                       controller.speakState.value = true;
                     } else {
                       controller.stop();
@@ -92,7 +92,8 @@ class GenerateScreen extends GetView<GenerateController> {
 
 //Şiirin bulunduğu widget
 class Poem extends StatelessWidget {
-  const Poem({Key? key, required this.text, required this.controller}) : super(key: key);
+  const Poem({Key? key, required this.text, required this.controller})
+      : super(key: key);
 
   final String text;
 
@@ -119,9 +120,10 @@ class Poem extends StatelessWidget {
                   alignment: Alignment.center,
                   text: Text(text,
                       textAlign: TextAlign.center,
-                      style: controller.items.first
-                          .copyWith(color: controller.textColor.value, fontSize: controller.fontSize.value.toDouble())),
-                  duration: const Duration(milliseconds: 70))),
+                      style: controller.items.first.copyWith(
+                          color: controller.textColor.value,
+                          fontSize: controller.fontSize.value.toDouble())),
+                  duration: const Duration(milliseconds: 25))),
         ),
       ),
     );
@@ -154,7 +156,8 @@ class PoemStyleButton extends StatelessWidget {
                       children: [
                         Text(
                           "Pick a font",
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18.sp),
                         ),
                         TextButton(
                           onPressed: () {
@@ -163,12 +166,15 @@ class PoemStyleButton extends StatelessWidget {
                                 builder: (context) {
                                   return Dialog(
                                       child: Theme(
-                                    data: ThemeData(primaryColor: AppColors.cobalite),
+                                    data: ThemeData(
+                                        primaryColor: AppColors.cobalite),
                                     child: FontPicker(
                                         showInDialog: true,
                                         onFontChanged: (font) {
-                                          controller.selectedFont.value = font.fontFamily;
-                                          controller.selectedFontTextStyle[0] = font.toTextStyle();
+                                          controller.selectedFont.value =
+                                              font.fontFamily;
+                                          controller.selectedFontTextStyle[0] =
+                                              font.toTextStyle();
                                         },
                                         googleFonts: controller.myGoogleFonts),
                                   ));
@@ -176,7 +182,10 @@ class PoemStyleButton extends StatelessWidget {
                           },
                           child: Obx(() => Text(
                                 controller.selectedFont.value,
-                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp, color: Colors.white),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.sp,
+                                    color: Colors.white),
                               )),
                         ),
                       ],
@@ -192,29 +201,38 @@ class PoemStyleButton extends StatelessWidget {
                               builder: (context) => AlertDialog(
                                 title: Text(
                                   "Pick Your Font Size",
-                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18.sp),
                                 ),
                                 content: Obx(
                                   () => SizedBox(
                                     width: 100.w,
                                     height: 25.h,
                                     child: Theme(
-                                      data: ThemeData(primaryColor: AppColors.cobalite),
+                                      data: ThemeData(
+                                          primaryColor: AppColors.cobalite),
                                       child: Center(
                                         child: Column(children: [
                                           NumberPicker(
-                                            textStyle: TextStyle(color: AppColors.cobalite.withOpacity(0.5)),
-                                            selectedTextStyle: TextStyle(color: AppColors.cobalite, fontSize: 24.sp),
+                                            textStyle: TextStyle(
+                                                color: AppColors.cobalite
+                                                    .withOpacity(0.5)),
+                                            selectedTextStyle: TextStyle(
+                                                color: AppColors.cobalite,
+                                                fontSize: 24.sp),
                                             value: controller.fontSize.value,
                                             minValue: 1,
                                             maxValue: 100,
                                             step: 1,
                                             itemHeight: 100,
                                             axis: Axis.horizontal,
-                                            onChanged: (value) => controller.fontSize.value = value,
+                                            onChanged: (value) => controller
+                                                .fontSize.value = value,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               IconButton(
                                                   icon: Icon(
@@ -222,25 +240,34 @@ class PoemStyleButton extends StatelessWidget {
                                                     color: AppColors.cobalite,
                                                   ),
                                                   onPressed: () {
-                                                    final newValue = controller.fontSize.value - 5;
-                                                    controller.fontSize.value = newValue.clamp(1, 100);
+                                                    final newValue = controller
+                                                            .fontSize.value -
+                                                        5;
+                                                    controller.fontSize.value =
+                                                        newValue.clamp(1, 100);
                                                   }),
-                                              Text('Font size : ${controller.fontSize.value}'),
+                                              Text(
+                                                  'Font size : ${controller.fontSize.value}'),
                                               IconButton(
                                                   icon: Icon(
                                                     Icons.add,
                                                     color: AppColors.cobalite,
                                                   ),
                                                   onPressed: () {
-                                                    final newValue = controller.fontSize.value + 5;
-                                                    controller.fontSize.value = newValue.clamp(1, 100);
+                                                    final newValue = controller
+                                                            .fontSize.value +
+                                                        5;
+                                                    controller.fontSize.value =
+                                                        newValue.clamp(1, 100);
                                                   }),
                                             ],
                                           ),
                                           TextButton(
                                             child: Text(
                                               "SELECT",
-                                              style: TextStyle(fontSize: 20, color: AppColors.cobalite),
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: AppColors.cobalite),
                                             ),
                                             onPressed: () {
                                               Get.back();
@@ -256,7 +283,10 @@ class PoemStyleButton extends StatelessWidget {
                           },
                           child: Obx(() => Text(
                                 controller.fontSize.value.toString(),
-                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp, color: Colors.white),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.sp,
+                                    color: Colors.white),
                               )),
                         ),
                       ],
@@ -266,7 +296,8 @@ class PoemStyleButton extends StatelessWidget {
                       children: [
                         Text(
                           "Pick a text color",
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18.sp),
                         ),
                         TextButton(
                           onPressed: () {
@@ -275,7 +306,9 @@ class PoemStyleButton extends StatelessWidget {
                               builder: ((context) => AlertDialog(
                                   title: Text(
                                     "Pick Your Color",
-                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18.sp),
                                   ),
                                   content: SizedBox(
                                     width: 100.w,
@@ -283,12 +316,16 @@ class PoemStyleButton extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         BlockPicker(
-                                            availableColors: controller.fullMaterialColors,
-                                            pickerColor: controller.textColor.value,
+                                            availableColors:
+                                                controller.fullMaterialColors,
+                                            pickerColor:
+                                                controller.textColor.value,
                                             onColorChanged: ((color) {
-                                              controller.textColor.value = color;
+                                              controller.textColor.value =
+                                                  color;
                                               if (kDebugMode) {
-                                                print(controller.textColor.value..toString());
+                                                print(controller.textColor.value
+                                                  ..toString());
                                               }
                                             })),
                                         TextButton(
@@ -312,7 +349,8 @@ class PoemStyleButton extends StatelessWidget {
                                   .replaceAll("Color(0xff", "#")
                                   .replaceAll("MaterialColor(primary", "")
                                   .replaceAll("MaterialAccentColor(primary", "")
-                                  .replaceAll("ColorSwatch<dynamic>(primary", "")
+                                  .replaceAll(
+                                      "ColorSwatch<dynamic>(primary", "")
                                   .replaceAll("value:", "")
                                   .replaceAll(")", ""),
                               style: TextStyle(
@@ -420,9 +458,14 @@ class ShareButton extends StatelessWidget {
         child: Center(
           child: Text("Share",
               style: GoogleFonts.abel(
-                  fontSize: 20.sp, fontWeight: FontWeight.w600, letterSpacing: 2, color: Colors.white)),
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 2,
+                  color: Colors.white)),
         ),
-        decoration: BoxDecoration(color: AppColors.cobalite, borderRadius: BorderRadius.circular(16.sp)),
+        decoration: BoxDecoration(
+            color: AppColors.cobalite,
+            borderRadius: BorderRadius.circular(16.sp)),
       ),
     );
   }
@@ -443,7 +486,8 @@ class PoemTitle extends StatelessWidget {
     return Text(
       title ?? "",
       textAlign: TextAlign.center,
-      style: GoogleFonts.abhayaLibre(fontSize: 24.sp, color: Colors.black, fontWeight: FontWeight.w900),
+      style: GoogleFonts.abhayaLibre(
+          fontSize: 24.sp, color: Colors.black, fontWeight: FontWeight.w900),
     );
   }
 }
