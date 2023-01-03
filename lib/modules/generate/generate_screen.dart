@@ -15,8 +15,10 @@ import 'package:typewritertext/typewritertext.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class GenerateScreen extends GetView<GenerateController> {
+
   GenerateScreen({super.key});
   static String poemTitle = "Oysa Herkes Öldürür Sevdiğini";
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,6 @@ class GenerateScreen extends GetView<GenerateController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: PoemTitle(
-                  title: poemTitle,
-                ),
-              ),
               SizedBox(
                 height: 1.h,
               ),
@@ -53,11 +50,12 @@ class GenerateScreen extends GetView<GenerateController> {
                     child: Bounceable(
                   onTap: () {
                     if (controller.speakState.isFalse) {
+
                       controller.speak(arguments[0].toString());
                       controller.speakState.value = true;
+
                     } else {
                       controller.stop();
-                      controller.speakState.value = false;
                     }
                   },
                   child: controller.speakState.value
