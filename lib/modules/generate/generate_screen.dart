@@ -16,7 +16,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class GenerateScreen extends GetView<GenerateController> {
   const GenerateScreen({super.key});
-  static String poemTitle = "Oysa Herkes Öldürür Sevdiğini";
+
   static String poem =
       "Whenever I think of you\nA gazelle goes down to drink water\nI see the meadows growing.\nWith you every evening\nA green olive grain\nA piece of blue sea\nIt takes me.\nThe more i think of you\nI’m planting roses where my hand touches\nI give water to the horses\nI love mountains even more.";
 
@@ -28,11 +28,6 @@ class GenerateScreen extends GetView<GenerateController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: PoemTitle(
-                  title: poemTitle,
-                ),
-              ),
               SizedBox(
                 height: 1.h,
               ),
@@ -54,10 +49,8 @@ class GenerateScreen extends GetView<GenerateController> {
                   onTap: () {
                     if (controller.speakState.isFalse) {
                       controller.speak(poem);
-                      controller.speakState.value = true;
                     } else {
                       controller.stop();
-                      controller.speakState.value = false;
                     }
                   },
                   child: controller.speakState.value

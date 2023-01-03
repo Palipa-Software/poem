@@ -16,17 +16,26 @@ class GenerateController extends GetxController {
   void onInit() {
     super.onInit();
     selectedFontTextStyle.add(const TextStyle());
+    ttsSetLaunnge();
   }
 
   RxBool speakState = false.obs;
   FlutterTts flutterTts = FlutterTts();
-  void speak(String poem) async {
+  void ttsSetLaunnge() {
     flutterTts.setLanguage("en-US");
-    await flutterTts.speak(poem).whenComplete(() => speakState.value = false);
+  }
+
+  void speak(String poem) async {
+    await flutterTts.speak(poem);
+    speakState.value = true;
+    flutterTts.setCompletionHandler(() {
+      speakState.value = false;
+    });
   }
 
   void stop() async {
     await flutterTts.pause();
+    speakState.value = false;
   }
 
   RxString bgPath = "assets/images/bg.png".obs;
