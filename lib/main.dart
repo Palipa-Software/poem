@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
-          title: 'BoilerPlate',
+          title: 'Loves Poem',
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
